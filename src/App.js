@@ -1,35 +1,29 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [text, setText] = useState('ManRoo');
-  const onSubmit = () => {
-    alert('submitted')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const onSubmit = (event) => {
+    event.preventDefault();//submit이 페이지를 리프레쉬 시키는 것을 방지
+    console.log(username, password);
   }
-  const onKeyUp = (event) => {
-    if (event.keyCode === 13){
-      onSubmit();
-    }
-    
-  }
-
-  //let text = 'ManRoo';
-
-  const updateText = () => {
-    //text = 'Coder';
-    setText('Coder')
-    console.log(text);
-  }
+  
 
   return (
     <div className="App">
-      <input onKeyUp={onKeyUp} />
-      <button onClick={onSubmit}>Submit</button>
-    
-      <br /> <br />
-
-
-      <span>{text}</span>
-      <button onClick={updateText}>Update</button>
+      <form onSubmit={onSubmit}>
+      <input
+       placeholder="Username"
+       value={username}
+       onChange={(e) => setUsername(e.target.value)} 
+      /><br/>
+      <input
+       placeholder="Password"
+       value={password}
+       onChange={(e) => setPassword(e.target.value)}
+      /><br/>
+      <button type="submit">Login</button>
+      </form>
     </div>
   );
 }
